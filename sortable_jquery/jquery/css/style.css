@@ -1,0 +1,63 @@
+  body {
+    background-color: rgb(233, 243, 252);
+    margin: 0;
+    padding: 0;
+  }
+
+  h1 {
+    font-size: 32px; 
+    color: #4A90E2; 
+    text-align: center; 
+  }
+
+  .sortable-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  #verificar {
+    background-color: #A8D0E6; 
+    color: white; 
+    border: none; 
+    padding: 10px 20px; 
+    font-size: 16px; 
+    border-radius: 12px; 
+    cursor: pointer; 
+    display: block; 
+    margin: 40px auto; 
+    text-align: center; 
+  }
+  
+  #verificar:hover {
+    background-color: #74B3D4; 
+  }
+  
+    #sortable {
+      list-style-type: none;
+      width: 300px;
+      height: 300px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+
+    #sortable li {
+      width: 110px;
+      height: 110px;
+      text-align: center;
+      cursor: pointer;
+      background-size: 400px 400px; 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #sortable li:nth-child(1) { background-position: 0 0; }
+    #sortable li:nth-child(2) { background-position: -100px 0; }
+    #sortable li:nth-child(3) { background-position: -200px 0; }
+    #sortable li:nth-child(4) { background-position: 0 -100px; }
+    #sortable li:nth-child(5) { background-position: -100px -100px; }
+    #sortable li:nth-child(6) { background-position: -200px -100px; }
+    #sortable li:nth-child(7) { background-position: 0 -200px; }
+    #sortable li:nth-child(8) { background-position: -100px -200px; }
+    #sortable li:nth-child(9) { background-position: -200px -200px; }

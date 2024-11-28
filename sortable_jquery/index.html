@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jQuery - Sortable</title>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.14.1/themes/base/jquery-ui.css">
+   <!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+  <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
+</head>
+
+<body>
+  <h1>Quebra-Cabeça</h1>
+  <div class="sortable-container"> <!-- Lista de peças do quebra-cabeça interativas com a função "sortable" do jQuery UI -->
+
+    <ul id="sortable"> 
+      <li class="ui-state-default" style="background-image: url('img/paisagem.JPG')"></li>
+      <li class="ui-state-default" style="background-image: url('img/paisagem.JPG')"></li>
+      <li class="ui-state-default" style="background-image: url('img/paisagem.JPG')"></li>
+      <li class="ui-state-default" style="background-image: url('img/paisagem.JPG')"></li>
+      <li class="ui-state-default" style="background-image: url('img/paisagem.JPG')"></li>
+      <li class="ui-state-default" style="background-image: url('img/paisagem.JPG')"></li>
+      <li class="ui-state-default" style="background-image: url('img/paisagem.JPG')"></li>
+      <li class="ui-state-default" style="background-image: url('img/paisagem.JPG')"></li>
+      <li class="ui-state-default" style="background-image: url('img/paisagem.JPG')"></li>
+    </ul>
+  </div>
+
+  <button id="verificar">Verificar</button>
+
+  <script>
+    $(document).ready(function() { // Define as posições corretas de cada peça do quebra-cabeça
+      const posicoesCorretas = [
+        '0 0', '-100px 0', '-200px 0',
+        '0 -100px', '-100px -100px', '-200px -100px',
+        '0 -200px', '-100px -200px', '-200px -200px'
+      ];
+
+      function embaralhar() { // Embaralha as peças do quebra-cabeça, aplicando posições aleatórias nas peças
+        const itensLista = $('#sortable li').get();
+        const posicoes = [...posicoesCorretas];
+        posicoes.sort(() => Math.random() - 0.5);
+
+        itensLista.forEach((item, i) => {
+          $(item).css('background-position', posicoes[i]);
+        });
+        $('#sortable').html(itensLista);
+      }
+
+      function verificar() { // Verifica se o quebra-cabeça está montado corretamente
+        let resolvido = true;
+
+        $('#sortable li').each(function(index) {
+          const posicaoAtual = $(this).css('background-position');
+          const posicaoCorreta = posicoesCorretas[index];
+          
+          const [currentX, currentY] = posicaoAtual.split(' ').map(val => parseInt(val));
+          const [correctX, correctY] = posicaoCorreta.split(' ').map(val => parseInt(val));
+
+          if (currentX !== correctX || currentY !== correctY) {
+            resolvido = false;
+            return false; 
+          }
+        });
+
+        if (resolvido) {   // Exibe mensagem de sucesso
+          alert('Quebra-Cabeça Resolvido!');
+        } else {
+          alert('Quebra-Cabeça errado! Tente novamente.');
+        }
+      }
+
+      embaralhar();
+
+      $("#sortable").sortable();
+      $("#sortable").disableSelection();
+      $('#verificar').click(function() {
+        verificar();
+      });
+    });
+  </script>
+</body>
+</html>
